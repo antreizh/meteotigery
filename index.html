@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>HydroTigery</title>
+<meta name="description" content="Niveau de la nappe du Champigny et pluie, secteur de Tigery (91) – © antreizh.fr">
+<meta name="theme-color" content="#0c447c">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Public+Sans:wght@400;600&display=swap">
+<style>
+:root{--fg:#17252b;--muted:#5d6e75;--bg:#f3f6f7;--panel:#fff;--line:#d6dfe2;--grid:#e4eaec;--axis:#c2ccd0;--env:#8c9a9f;--bad:#b3392f;--good:#1f7a5a;
+--niv:#2a78d6;--rain:#1baf7a;--accent:#0c447c;--tipbg:#fff;--shadow:0 4px 14px rgba(20,40,48,.12);
+--sans:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--serif:"Fraunces",Georgia,serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fg:#e3ecef;--muted:#97a8ae;--bg:#0f1a1e;--panel:#16252b;--line:#2c3f46;--grid:#243840;--axis:#3a4f57;--env:#7d8e94;--bad:#ee8a80;--good:#6fd3a8;
+--niv:#6aa8f0;--rain:#3fcf98;--accent:#8cc0f0;--tipbg:#1d2f36;--shadow:0 4px 14px rgba(0,0,0,.4);color-scheme:dark}}
+:root[data-theme="dark"]{--fg:#e3ecef;--muted:#97a8ae;--bg:#0f1a1e;--panel:#16252b;--line:#2c3f46;--grid:#243840;--axis:#3a4f57;--env:#7d8e94;--bad:#ee8a80;--good:#6fd3a8;
+--niv:#6aa8f0;--rain:#3fcf98;--accent:#8cc0f0;--tipbg:#1d2f36;--shadow:0 4px 14px rgba(0,0,0,.4);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--sans);
+  padding:max(14px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+main{max-width:64rem;margin:0 auto;display:grid;gap:18px}
+header{display:grid;gap:4px}
+h1{font:600 clamp(26px,6vw,34px)/1.1 var(--serif);margin:0;color:var(--accent)}
+.lead{margin:0;color:var(--muted)}
+.last{margin:0;font-variant-numeric:tabular-nums}
+nav{display:flex;gap:6px;flex-wrap:wrap;position:sticky;top:0;background:var(--bg);padding:6px 0;z-index:5}
+nav button{font:600 14px var(--sans);border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:7px 14px;cursor:pointer}
+nav button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10.5rem),1fr));gap:10px}
+.tile,.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.tile{display:grid;gap:3px;align-content:start}
+.lab{font-size:12px;color:var(--muted)}
+.big{font:400 28px/1.1 var(--serif);font-variant-numeric:tabular-nums}
+.sub{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.neg{color:var(--bad)!important}.pos{color:var(--good)!important}
+.card{display:grid;gap:8px}
+.card h2{margin:0;font-size:19px;line-height:1.25}
+.card h3{margin:8px 0 0;font-size:14px}
+.note{margin:0;font-size:12.5px;color:var(--muted)}
+.chart{position:relative;min-height:260px}
+.chart.rain{min-height:130px}
+.chart svg{display:block;overflow:visible}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:10px;border-radius:2px;display:inline-block}
+.tip{position:absolute;pointer-events:none;background:var(--tipbg);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:6px 9px;font-size:12px;white-space:nowrap;z-index:3;font-variant-numeric:tabular-nums}
+.tip .d{color:var(--muted)}
+.tablebox{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14px}
+th,td{padding:6px 9px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-size:12px;color:var(--muted);font-weight:600}
+.syn p{margin:0 0 8px}.syn ul{margin:0;padding-left:18px}.syn li{margin:0 0 6px}
+.btn{display:inline-block;font:600 14px var(--sans);background:var(--accent);color:var(--panel);text-decoration:none;border-radius:8px;padding:9px 14px;justify-self:start}
+.fail{color:var(--bad);font-size:13px}
+footer{font-size:12px;color:var(--muted);display:grid;gap:4px}
+footer a{color:inherit}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>HydroTigery</h1>
+    <p class="lead">Nappe du Champigny et pluie dans le secteur de Tigery (Essonne)</p>
+    <p class="last" id="last">Chargement des relevés…</p>
+  </header>
+
+  <nav role="tablist">
+    <button role="tab" data-tab="situation" aria-selected="true">Situation</button>
+    <button role="tab" data-tab="tendance" aria-selected="false">Tendance longue</button>
+    <button role="tab" data-tab="synthese" aria-selected="false">Synthèse 2026</button>
+  </nav>
+
+  <section id="tab-situation" class="tab">
+    <div class="kpis" id="kpis"></div>
+    <div class="card" style="margin-top:12px">
+      <h2 id="t-annee">Niveau de la nappe et pluie journalière</h2>
+      <p class="note">Piézomètre de Férolles-Attilly (nappe du Champigny), comparé à son historique 2004-2025 ; pluie de la station Météo-France de Melun-Villaroche. La hauteur de la nappe est une altitude : m NGF, mètres au-dessus du niveau moyen de la mer. Le sol au piézomètre est à 92,5 m NGF.</p>
+      <h3>Évolution de la nappe</h3>
+      <div class="chart" id="ch-niv"></div>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--niv)"></i>Niveau (médiane 7 jours)</span>
+        <span><i class="sw" style="height:0;border-top:2px dashed var(--muted);border-radius:0"></i>Moyenne 2004-2025</span>
+        <span><i class="sw" style="background:var(--env);opacity:.3"></i>Min – max 2004-2025</span>
+      </div>
+      <h3>Pluviométrie</h3>
+      <div class="chart rain" id="ch-pluie"></div>
+      <div class="legend"><span><i class="sw" style="background:var(--rain)"></i>Pluie journalière à Melun (mm)</span></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h2>Bilan mensuel</h2>
+      <div class="tablebox" id="tab-mois"></div>
+      <p class="note">Pluie en rouge : moins de la moitié de la normale 2004-2025 du mois. Écart : niveau du mois moins la moyenne 2004-2025 des mêmes jours.</p>
+    </div>
+  </section>
+
+  <section id="tab-tendance" class="tab" hidden>
+    <div class="card">
+      <h2>Une nappe qui se souvient de deux ans de pluie</h2>
+      <p class="note">Écart du niveau de la nappe à sa moyenne du jour, comparé à l'écart de la pluie de Melun cumulé sur 24 mois. La nappe du Champigny ne réagit pas à la pluie du jour : elle suit le cumul des pluies des deux dernières années.</p>
+      <div class="chart" id="ch-long" style="min-height:300px"></div>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--niv)"></i>Écart du niveau (m, axe de gauche)</span>
+        <span><i class="sw" style="background:var(--rain)"></i>Écart de pluie cumulé sur 24 mois (mm, axe de droite)</span>
+      </div>
+      <p class="note" id="corr-note"></p>
+    </div>
+  </section>
+
+  <section id="tab-synthese" class="tab" hidden>
+    <div class="card syn">
+      <h2>Synthèse pluie et nappe 2026</h2>
+      <p class="note">Analyse du 9 novembre 2026, données au 8 novembre. Les tableaux et graphiques des autres onglets, eux, se mettent à jour chaque jour.</p>
+      <p>La nappe du Champigny sous Tigery est une nappe <b>profonde et très lente</b>. Elle ne réagit ni à la pluie du jour ni à celle du mois, mais au <b>cumul des pluies de l'hiver et des deux dernières années</b>.</p>
+      <ul>
+        <li><b>2026, année la plus sèche depuis 2004 à Melun :</b> 337 mm du 1<sup>er</sup> janvier au 7 novembre, soit 39 % de moins que la moyenne (Orly : 404 mm, −23 %).</li>
+        <li><b>Hiver 2025-2026 manqué :</b> 263 mm d'octobre à mars, contre 319 mm en moyenne. La nappe n'est remontée que de 10 cm et atteint son maximum de l'année dès le 4 janvier (49,55 m).</li>
+        <li><b>Vidange continue :</b> −0,79 m depuis le pic de janvier, environ 12 cm par mois de juin à octobre. Sur l'année hydrologique 2025-2026 (421 mm, la plus sèche de la série), la baisse atteint 1,03 m d'octobre à octobre, la plus forte depuis 2004.</li>
+        <li><b>Encore au-dessus de la moyenne :</b> 48,75 m NGF le 8 novembre, soit 0,30 m au-dessus de la moyenne du jour, grâce aux réserves de 2024, année record (1 064 mm d'octobre 2023 à septembre 2024). L'avance fond : elle était de 1,14 m début janvier.</li>
+        <li><b>Ce qui fait remonter la nappe :</b> la pluie d'octobre à mars (r = 0,78 sur 22 hivers). Sous environ 200 mm, presque rien. Au-delà, chaque tranche de 10 mm ajoute environ 5 cm. Un hiver moyen donne environ +60 cm.</li>
+        <li><b>Perspective :</b> un hiver 2026-2027 normal suffirait à stabiliser la nappe. Un deuxième hiver sec la ferait probablement passer sous sa moyenne au printemps 2027. Ce sont des ordres de grandeur, pas une prévision.</li>
+      </ul>
+      <p class="note">Le puits de Tigery (02198X0016/P1) est un captage suivi seulement pour la qualité de l'eau, et le poste Météo-France de Tigery (91617001) ne relève plus depuis avant 1950. Les points de mesure en service les plus proches sont donc utilisés : Férolles-Attilly (11 km, même masse d'eau), contrôlé par Savigny-le-Temple (5 km, r = 0,86), et Melun-Villaroche (12 km).</p>
+      <a class="btn" href="docs/Synthese_pluie_nappe_Tigery_2026.pdf" target="_blank" rel="noopener">Ouvrir la synthèse complète (PDF)</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Sources : Hub'Eau / ADES (BRGM) — piézomètres 02202X0150/FR Férolles-Attilly et 02581X0103/P9 Savigny-le-Temple ; Météo-France, données climatologiques de base quotidiennes — MELUN 77306001. Relevés actualisés deux fois par jour.</span>
+    <span id="maj"></span>
+    <span>Tbb © <a href="https://www.antreizh.fr" target="_blank" rel="noopener">antreizh.fr</a></span>
+  </footer>
+</main>
+
+<script src="d3.min.js"></script>
+<script>
+(() => {
+  const MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  const MC = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  const nf = (v, d = 2, sign = false) => (sign && v > 0 ? '+' : '') + v.toLocaleString('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d }).replace('-', '−');
+  const parseD = s => new Date(s + 'T12:00:00Z');
+  const iso = d => d.toISOString().slice(0, 10);
+  const md = s => s.slice(5, 10);
+  const addDays = (s, n) => { const d = parseD(s); d.setUTCDate(d.getUTCDate() + n); return iso(d); };
+  const dLong = s => { const d = parseD(s); return `${d.getUTCDate()}${d.getUTCDate() === 1 ? 'er' : ''} ${MOIS[d.getUTCMonth()]} ${d.getUTCFullYear()}`; };
+  const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+  // Onglets
+  document.querySelectorAll('nav button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('nav button').forEach(x => x.setAttribute('aria-selected', x === b));
+    document.querySelectorAll('.tab').forEach(t => t.hidden = t.id !== 'tab-' + b.dataset.tab);
+    try { localStorage.setItem('hydrotigery-onglet', b.dataset.tab); } catch (e) {}
+    if (window._draw) window._draw();
+  }));
+  try { const t = localStorage.getItem('hydrotigery-onglet'); if (t) document.querySelector(`nav button[data-tab="${t}"]`)?.click(); } catch (e) {}
+
+  const csv = async n => {
+    const r = await fetch(`data/${n}?v=${Date.now()}`, { cache: 'no-store' });
+    if (!r.ok) throw new Error(`${n} : HTTP ${r.status}`);
+    return d3.dsvFormat(';').parse(await r.text());
+  };
+
+  Promise.all([csv('pluie_melun.csv'), csv('nappe_ferolles_attilly.csv')]).then(([P, N]) => {
+    // Séries journalières continues
+    const rain = new Map(P.filter(d => d.pluie_mm !== '').map(d => [d.date, +d.pluie_mm]));
+    const raw = new Map(N.filter(d => d.niveau_m_ngf !== '').map(d => [d.date, +d.niveau_m_ngf]));
+    const lastH = [...raw.keys()].sort().at(-1), lastR = [...rain.keys()].sort().at(-1);
+    const start = '2004-01-01';
+    const days = []; for (let d = start; d <= lastH; d = addDays(d, 1)) days.push(d);
+    // Médiane glissante centrée sur 7 jours (filtre les à-coups dus aux pompages)
+    const sm = new Map();
+    days.forEach((d, i) => {
+      const w = []; for (let k = -3; k <= 3; k++) { const v = raw.get(days[i + k]); if (v != null) w.push(v); }
+      if (w.length >= 3) sm.set(d, d3.median(w));
+    });
+    // Climatologie 2004-2025 par jour de l'année
+    const env = new Map();
+    for (const [d, v] of sm) { if (d < '2026' ) { const k = md(d); const e = env.get(k) || []; e.push(v); env.set(k, e); } }
+    const E = new Map([...env].map(([k, a]) => [k, { mean: d3.mean(a), min: d3.min(a), max: d3.max(a) }]));
+    E.set('02-29', E.get('02-29') || E.get('02-28'));
+    const rainClim = new Map(); // pluie moyenne par jour de l'année
+    for (const [d, v] of rain) if (d < '2026') { const k = md(d); const e = rainClim.get(k) || []; e.push(v); rainClim.set(k, e); }
+    const RC = new Map([...rainClim].map(([k, a]) => [k, d3.mean(a)]));
+
+    const Y = lastH.slice(0, 4);
+    const lastS = [...sm.keys()].filter(d => d <= lastH).sort().at(-1);
+    const anom = d => sm.get(d) - E.get(md(d)).mean;
+    const sumR = (a, b) => { let s = 0; for (let d = a; d <= b; d = addDays(d, 1)) s += rain.get(d) || 0; return s; };
+    const ytd = sumR(`${lastR.slice(0, 4)}-01-01`, lastR);
+    const yrs = d3.range(2004, +lastR.slice(0, 4));
+    const ytdMean = d3.mean(yrs, y => sumR(`${y}-01-01`, `${y}${lastR.slice(4)}`));
+    const r30 = sumR(addDays(lastR, -29), lastR);
+    let r30n = 0; for (let d = addDays(lastR, -29); d <= lastR; d = addDays(d, 1)) r30n += RC.get(md(d)) || 0;
+    const ch = n => sm.get(lastS) - sm.get(addDays(lastS, -n));
+    const peakY = d3.max([...sm].filter(([d]) => d >= `${Y}-01-01`), d => d[1]);
+
+    document.getElementById('last').textContent = `Dernière mesure de la nappe : ${dLong(lastH)} · pluie : ${dLong(lastR)}`;
+    const tiles = [
+      ['Niveau de la nappe', `${nf(raw.get(lastH))} m`, `${nf(anom(lastS), 2, true)} m par rapport à la moyenne du jour`, anom(lastS) < 0],
+      ['Évolution sur 7 jours', `${nf(ch(7) * 100, 0, true)} cm`, `sur 30 jours : ${nf(ch(30) * 100, 0, true)} cm`, ch(7) < 0],
+      [`Pluie depuis le 1er janvier`, `${nf(ytd, 0)} mm`, `${nf((ytd / ytdMean - 1) * 100, 0, true)} % par rapport à la moyenne (${nf(ytdMean, 0)} mm)`, ytd < ytdMean],
+      ['Pluie des 30 derniers jours', `${nf(r30, 0)} mm`, `normale : ${nf(r30n, 0)} mm`, r30 < r30n],
+      [`Depuis le plus haut de ${Y}`, `${nf((sm.get(lastS) - peakY) * 100, 0, true)} cm`, `plus haut : ${nf(peakY)} m`, sm.get(lastS) < peakY]
+    ];
+    document.getElementById('kpis').innerHTML = tiles.map(([l, b, s, bad]) =>
+      `<div class="tile"><span class="lab">${l}</span><span class="big${bad ? ' neg' : ''}">${b}</span><span class="sub">${s}</span></div>`).join('');
+    document.getElementById('t-annee').textContent = `Niveau de la nappe et pluie journalière, ${Y}`;
+
+    // Bilan mensuel de l'année en cours
+    const rows = [];
+    for (let m = 1; m <= +lastH.slice(5, 7); m++) {
+      const a = `${Y}-${String(m).padStart(2, '0')}-01`, bFull = addDays(m === 12 ? `${+Y + 1}-01-01` : `${Y}-${String(m + 1).padStart(2, '0')}-01`, -1);
+      const b = bFull < lastH ? bFull : lastH;
+      const dd = days.filter(d => d >= a && d <= b && sm.has(d));
+      const pr = sumR(a, b < lastR ? b : lastR);
+      let norm = 0; for (let d = a; d <= bFull; d = addDays(d, 1)) norm += RC.get(md(d)) || 0;
+      rows.push({ m, part: b < bFull, pr, norm, hm: d3.mean(dd, d => sm.get(d)), dh: dd.length ? sm.get(dd.at(-1)) - sm.get(dd[0]) : NaN, an: d3.mean(dd, anom), j: +b.slice(8) });
+    }
+    document.getElementById('tab-mois').innerHTML = `<table><thead><tr><th>Mois</th><th>Pluie (mm)</th><th>Normale</th><th>Niveau moyen (m)</th><th>Variation (m)</th><th>Écart (m)</th></tr></thead><tbody>${
+      rows.map(r => `<tr><td>${MOIS[r.m - 1][0].toUpperCase() + MOIS[r.m - 1].slice(1)}${r.part ? ` (1-${r.j})` : ''}</td><td class="${!r.part && r.pr < r.norm / 2 ? 'neg' : ''}">${nf(r.pr, 0)}</td><td>${nf(r.norm, 0)}</td><td>${nf(r.hm)}</td><td class="${r.dh < 0 ? 'neg' : ''}">${nf(r.dh, 2, true)}</td><td class="${r.an < 0 ? 'neg' : ''}">${nf(r.an, 2, true)}</td></tr>`).join('')
+    }</tbody></table>`;
+
+    // Tendance longue : écart de niveau et écart de pluie cumulé sur 24 mois
+    const N24 = 730, ra = days.map(d => (rain.get(d) ?? 0) - (RC.get(md(d)) || 0));
+    const cum = []; let acc = 0;
+    days.forEach((d, i) => { acc += ra[i]; if (i >= N24) acc -= ra[i - N24]; if (i >= N24 - 1 && d <= lastR) cum.push([d, acc]); });
+    const an = days.filter(d => sm.has(d)).map(d => [d, anom(d)]);
+    const cm = new Map(cum), pairs = an.filter(([d]) => cm.has(d)).map(([d, v]) => [v, cm.get(d)]);
+    const rr = d3.mean(pairs, p => p[0]) != null ? (() => { const mx = d3.mean(pairs, p => p[0]), my = d3.mean(pairs, p => p[1]);
+      let sxy = 0, sxx = 0, syy = 0; for (const [x, y] of pairs) { sxy += (x - mx) * (y - my); sxx += (x - mx) ** 2; syy += (y - my) ** 2; } return sxy / Math.sqrt(sxx * syy); })() : NaN;
+    document.getElementById('corr-note').textContent = `Corrélation entre les deux courbes depuis 2006 : r = ${nf(rr, 2)}. Écart de niveau actuel : ${nf(anom(lastS), 2, true)} m ; écart de pluie sur 24 mois : ${nf(cum.at(-1)[1], 0, true)} mm.`;
+    document.getElementById('maj').textContent = `Données lues le ${new Date().toLocaleDateString('fr-FR')} · mesures jusqu'au ${dLong(lastH)}.`;
+
+    // ---------- Graphiques ----------
+    const tipOf = el => { let t = el.querySelector('.tip'); if (!t) { t = document.createElement('div'); t.className = 'tip'; t.hidden = true; el.appendChild(t); } return t; };
+    const frame = (el, h, m) => {
+      el.querySelectorAll('svg').forEach(s => s.remove());
+      const W = Math.max(280, el.clientWidth);
+      const svg = d3.select(el).append('svg').attr('width', W).attr('height', h);
+      return { svg, W, iw: W - m.l - m.r, ih: h - m.t - m.b, g: svg.append('g').attr('transform', `translate(${m.l},${m.t})`) };
+    };
+    const axisStyle = g => { g.selectAll('text').attr('fill', css('--muted')).style('font', '11px var(--sans)'); g.selectAll('line').attr('stroke', css('--axis')); g.select('.domain').remove(); };
+    const monthAxis = (g, x, ih, iw) => {
+      const ax = d3.axisBottom(x).ticks(d3.utcMonth.every(iw < 420 ? 2 : 1)).tickFormat(d => MC[d.getUTCMonth()]).tickSizeOuter(0);
+      g.append('g').attr('transform', `translate(0,${ih})`).call(ax).call(axisStyle);
+    };
+
+    function drawNiveau() {
+      const el = document.getElementById('ch-niv'); if (!el.offsetParent) return;
+      const m = { t: 10, r: 10, b: 24, l: 44 }, { svg, iw, ih, g } = frame(el, 270, m);
+      const yd = days.filter(d => d >= `${Y}-01-01`);
+      const x = d3.scaleUtc().domain([parseD(`${Y}-01-01`), parseD(`${Y}-12-31`)]).range([0, iw]);
+      const all = d3.range(0, 365).map(i => addDays(`${Y}-01-01`, i)).filter(d => d.slice(0, 4) === Y);
+      const vals = all.flatMap(d => { const e = E.get(md(d)); return e ? [e.min, e.max] : []; }).concat(yd.map(d => sm.get(d)).filter(v => v != null));
+      const y = d3.scaleLinear().domain(d3.extent(vals)).nice().range([ih, 0]);
+      g.append('g').call(d3.axisLeft(y).ticks(5).tickSize(-iw).tickFormat(v => nf(v, 1))).call(axisStyle).selectAll('line').attr('stroke', css('--grid'));
+      g.append('path').datum(all).attr('fill', css('--env')).attr('opacity', .25)
+        .attr('d', d3.area().x(d => x(parseD(d))).y0(d => y(E.get(md(d)).min)).y1(d => y(E.get(md(d)).max)));
+      g.append('path').datum(all).attr('fill', 'none').attr('stroke', css('--muted')).attr('stroke-dasharray', '5 4').attr('stroke-width', 1.3)
+        .attr('d', d3.line().x(d => x(parseD(d))).y(d => y(E.get(md(d)).mean)));
+      g.append('path').datum(yd).attr('fill', 'none').attr('stroke', css('--niv')).attr('stroke-width', 2.4)
+        .attr('d', d3.line().defined(d => sm.has(d)).x(d => x(parseD(d))).y(d => y(sm.get(d))));
+      g.append('circle').attr('cx', x(parseD(lastS))).attr('cy', y(sm.get(lastS))).attr('r', 4).attr('fill', css('--niv'));
+      monthAxis(g, x, ih, iw);
+      hover(el, g, x, yd, ih, d => `<div class="d">${dLong(d)}</div>Niveau : <b>${raw.has(d) ? nf(raw.get(d)) + ' m' : '—'}</b><br>Moyenne : ${nf(E.get(md(d)).mean)} m<br>Écart : ${sm.has(d) ? nf(anom(d), 2, true) + ' m' : '—'}`);
+    }
+    function drawPluie() {
+      const el = document.getElementById('ch-pluie'); if (!el.offsetParent) return;
+      const m = { t: 8, r: 10, b: 24, l: 44 }, { iw, ih, g } = frame(el, 140, m);
+      const yd = days.filter(d => d >= `${Y}-01-01` && d <= lastR);
+      const x = d3.scaleUtc().domain([parseD(`${Y}-01-01`), parseD(`${Y}-12-31`)]).range([0, iw]);
+      const y = d3.scaleLinear().domain([0, Math.max(10, d3.max(yd, d => rain.get(d) || 0))]).nice().range([ih, 0]);
+      g.append('g').call(d3.axisLeft(y).ticks(3).tickSize(-iw)).call(axisStyle).selectAll('line').attr('stroke', css('--grid'));
+      const bw = Math.max(1, iw / 366 - .4);
+      g.selectAll('rect').data(yd.filter(d => rain.get(d) > 0)).join('rect').attr('x', d => x(parseD(d)) - bw / 2).attr('width', bw)
+        .attr('y', d => y(rain.get(d))).attr('height', d => ih - y(rain.get(d))).attr('fill', css('--rain'));
+      monthAxis(g, x, ih, iw);
+      hover(el, g, x, yd, ih, d => `<div class="d">${dLong(d)}</div>Pluie : <b>${nf(rain.get(d) || 0, 1)} mm</b>`);
+    }
+    function drawLong() {
+      const el = document.getElementById('ch-long'); if (!el.offsetParent) return;
+      const m = { t: 10, r: 48, b: 24, l: 44 }, { iw, ih, g } = frame(el, 300, m);
+      const x = d3.scaleUtc().domain([parseD(start), parseD(lastH)]).range([0, iw]);
+      const la = d3.max(an, d => Math.abs(d[1])) * 1.1, lc = d3.max(cum, d => Math.abs(d[1])) * 1.1;
+      const y = d3.scaleLinear().domain([-la, la]).range([ih, 0]), y2 = d3.scaleLinear().domain([-lc, lc]).range([ih, 0]);
+      g.append('g').call(d3.axisLeft(y).ticks(5).tickSize(-iw).tickFormat(v => nf(v, 1, true))).call(axisStyle).selectAll('line').attr('stroke', css('--grid'));
+      g.append('g').attr('transform', `translate(${iw},0)`).call(d3.axisRight(y2).ticks(5).tickFormat(v => nf(v, 0, true))).call(axisStyle);
+      g.append('line').attr('x1', 0).attr('x2', iw).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', css('--muted'));
+      g.append('path').datum(cum).attr('fill', 'none').attr('stroke', css('--rain')).attr('stroke-width', 1.5).attr('d', d3.line().x(d => x(parseD(d[0]))).y(d => y2(d[1])));
+      g.append('path').datum(an).attr('fill', 'none').attr('stroke', css('--niv')).attr('stroke-width', 1.8).attr('d', d3.line().x(d => x(parseD(d[0]))).y(d => y(d[1])));
+      g.append('g').attr('transform', `translate(0,${ih})`).call(d3.axisBottom(x).ticks(iw < 420 ? d3.utcYear.every(4) : d3.utcYear.every(2)).tickFormat(d3.utcFormat('%Y')).tickSizeOuter(0)).call(axisStyle);
+      const am = new Map(an);
+      hover(el, g, x, days.filter((d, i) => i % 3 === 0 || d === lastH), ih, d => `<div class="d">${dLong(d)}</div>Écart de niveau : <b>${am.has(d) ? nf(am.get(d), 2, true) + ' m' : '—'}</b><br>Pluie sur 24 mois : ${cm.has(d) ? nf(cm.get(d), 0, true) + ' mm' : '—'}`);
+    }
+    function hover(el, g, x, list, ih, html) {
+      const tip = tipOf(el), rule = g.append('line').attr('y1', 0).attr('y2', ih).attr('stroke', css('--muted')).attr('stroke-dasharray', '2 3').attr('visibility', 'hidden');
+      const ov = g.append('rect').attr('width', x.range()[1]).attr('height', ih).attr('fill', 'transparent');
+      const bis = d3.bisector(d => parseD(d)).center;
+      const move = ev => {
+        const [px] = d3.pointer(ev, ov.node()); const d = list[bis(list, x.invert(px))]; if (!d) return;
+        rule.attr('x1', x(parseD(d))).attr('x2', x(parseD(d))).attr('visibility', 'visible');
+        tip.innerHTML = html(d); tip.hidden = false;
+        const left = Math.min(Math.max(x(parseD(d)) + 44 - tip.offsetWidth / 2, 0), el.clientWidth - tip.offsetWidth);
+        tip.style.left = left + 'px'; tip.style.top = '0px';
+      };
+      ov.on('pointermove', move).on('pointerdown', move).on('pointerleave', () => { tip.hidden = true; rule.attr('visibility', 'hidden'); });
+    }
+    window._draw = () => { drawNiveau(); drawPluie(); drawLong(); };
+    window._draw();
+    let w = 0; new ResizeObserver(e => { const nw = Math.round(e[0].contentRect.width); if (nw !== w) { w = nw; requestAnimationFrame(window._draw); } }).observe(document.querySelector('main'));
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', window._draw);
+  }).catch(e => {
+    document.getElementById('last').innerHTML = `<span class="fail">Impossible de lire les relevés (${e.message}). Rechargez la page.</span>`;
+  });
+})();
+</script>
+</body>
+</html>

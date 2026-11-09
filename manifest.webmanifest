@@ -1,0 +1,12 @@
+{
+  "name": "HydroTigery",
+  "short_name": "HydroTigery",
+  "description": "Nappe du Champigny et pluie, secteur de Tigery (91) – © antreizh.fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f6f7",
+  "theme_color": "#0c447c",
+  "lang": "fr",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
