@@ -13,6 +13,7 @@ import csv, gzip, io, json, os, sys, urllib.request, urllib.parse
 BASE_MF = 'https://meteofrance.s3.sbg.io.cloud.ovh.net/data/synchro_ftp/BASE/QUOT/'
 DEBUT = '20040101'
 STATION_PLUIE = '77306001'
+CONTROLE_PLUIE = ('91', '91027002', 'pluie_orly.csv')  # Orly : contrôle de la pluie de Melun
 POSTE_TIGERY = '91617001'
 PIEZOS = {'02202X0150/FR': 'nappe_ferolles_attilly.csv', '02581X0103/P9': 'nappe_savigny_le_temple.csv'}
 DATA = os.path.join(os.path.dirname(__file__), '..', '..', 'data')
@@ -68,18 +69,28 @@ def fusion_csv(chemin, entete, nouvelles):
     return len(lignes)
 
 
-def pluie():
-    fichiers = lister('Q_77_')
+def serie_mf(dep, poste, nom):
+    fichiers = lister(f'Q_{dep}_')
     choisis = [f for f in fichiers if 'RR-T-Vent' in f and ('previous' in f or 'latest' in f)]
+    choisis.sort(key=lambda f: 'latest' in f)  # previous puis latest : le plus récent l'emporte
     serie, infos = {}, {}
-    for f in sorted(choisis):  # previous puis latest : le plus récent l'emporte
-        o, inf = lire_mf(f, {STATION_PLUIE})
-        serie.update(o.get(STATION_PLUIE, {}))
+    for f in choisis:
+        o, inf = lire_mf(f, {poste})
+        serie.update(o.get(poste, {}))
         infos.update(inf)
     lignes = {f'{d[:4]}-{d[4:6]}-{d[6:]}': list(v) for d, v in serie.items()}
-    n = fusion_csv(os.path.join(DATA, 'pluie_melun.csv'), ['date', 'pluie_mm', 'temperature_moyenne_c'], lignes)
-    print(f'Pluie Melun : {n} jours ({choisis})')
-    return infos.get(STATION_PLUIE, {}), choisis
+    n = fusion_csv(os.path.join(DATA, nom), ['date', 'pluie_mm', 'temperature_moyenne_c'], lignes)
+    print(f'Pluie {poste} : {n} jours ({choisis})')
+    return {'poste': poste, **infos.get(poste, {}), 'fichiers': choisis}
+
+
+def pluie():
+    out = {'reference': serie_mf('77', STATION_PLUIE, 'pluie_melun.csv')}
+    try:
+        out['controle'] = serie_mf(*CONTROLE_PLUIE)
+    except Exception as e:
+        print('ERREUR contrôle Orly', e, file=sys.stderr)
+    return out
 
 
 def poste_tigery():
