@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Télécharge les relevés utilisés par l'appli HydroTigery et les range dans data/.
+"""Télécharge les relevés utilisés par l'appli HydroNappeChampigny et les range dans data/.
 
 - Pluie et température : Météo-France, données climatologiques de base quotidiennes,
   station MELUN (77306001, Melun-Villaroche). Fichiers publics Q_77_previous… et Q_77_latest….

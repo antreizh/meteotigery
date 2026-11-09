@@ -3,9 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>HydroTigery</title>
+<title>HydroNappeChampigny</title>
 <meta name="description" content="Niveau de la nappe du Champigny et pluie, secteur de Tigery (91) – © antreizh.fr">
 <meta name="theme-color" content="#0c447c">
+<meta name="apple-mobile-web-app-title" content="HydroNappeChampigny">
+<meta name="application-name" content="HydroNappeChampigny">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
@@ -24,7 +26,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--sans);
   padding:max(14px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
 main{max-width:64rem;margin:0 auto;display:grid;gap:18px}
 header{display:grid;gap:4px}
-h1{font:600 clamp(26px,6vw,34px)/1.1 var(--serif);margin:0;color:var(--accent)}
+h1{font:600 clamp(24px,6vw,34px)/1.1 var(--serif);margin:0;color:var(--accent);overflow-wrap:anywhere}
 .lead{margin:0;color:var(--muted)}
 .last{margin:0;font-variant-numeric:tabular-nums}
 nav{display:flex;gap:6px;flex-wrap:wrap;position:sticky;top:0;background:var(--bg);padding:6px 0;z-index:5}
@@ -65,7 +67,7 @@ footer a{color:inherit}
 <body>
 <main>
   <header>
-    <h1>HydroTigery</h1>
+    <h1>HydroNappeChampigny</h1>
     <p class="lead">Nappe du Champigny et pluie dans le secteur de Tigery (Essonne)</p>
     <p class="last" id="last">Chargement des relevés…</p>
   </header>
@@ -154,10 +156,10 @@ footer a{color:inherit}
   document.querySelectorAll('nav button').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('nav button').forEach(x => x.setAttribute('aria-selected', x === b));
     document.querySelectorAll('.tab').forEach(t => t.hidden = t.id !== 'tab-' + b.dataset.tab);
-    try { localStorage.setItem('hydrotigery-onglet', b.dataset.tab); } catch (e) {}
+    try { localStorage.setItem('hydronappechampigny-onglet', b.dataset.tab); } catch (e) {}
     if (window._draw) window._draw();
   }));
-  try { const t = localStorage.getItem('hydrotigery-onglet'); if (t) document.querySelector(`nav button[data-tab="${t}"]`)?.click(); } catch (e) {}
+  try { const t = localStorage.getItem('hydronappechampigny-onglet'); if (t) document.querySelector(`nav button[data-tab="${t}"]`)?.click(); } catch (e) {}
 
   const csv = async n => {
     const r = await fetch(`data/${n}?v=${Date.now()}`, { cache: 'no-store' });
