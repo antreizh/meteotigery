@@ -1,16 +1,28 @@
 {
- "pluie": [
-  {
+ "pluie": {
+  "reference": {
+   "poste": "77306001",
    "NOM_USUEL": "MELUN",
    "LAT": "48.610333",
    "LON": "2.679500",
-   "ALTI": "91"
+   "ALTI": "91",
+   "fichiers": [
+    "Q_77_previous-1950-2024_RR-T-Vent.csv.gz",
+    "Q_77_latest-2025-2026_RR-T-Vent.csv.gz"
+   ]
   },
-  [
-   "Q_77_latest-2025-2026_RR-T-Vent.csv.gz",
-   "Q_77_previous-1950-2024_RR-T-Vent.csv.gz"
-  ]
- ],
+  "controle": {
+   "poste": "91027002",
+   "NOM_USUEL": "ORLY",
+   "LAT": "48.718000",
+   "LON": "2.397000",
+   "ALTI": "86",
+   "fichiers": [
+    "Q_91_previous-1950-2024_RR-T-Vent.csv.gz",
+    "Q_91_latest-2025-2026_RR-T-Vent.csv.gz"
+   ]
+  }
+ },
  "nappe": {
   "02202X0150/FR": {
    "bss_id": "BSS000RPUR",
