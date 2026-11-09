@@ -1,0 +1,98 @@
+{
+ "fichiers": [
+  "data/synchro_ftp/BASE/QUOT/Q_29_previous-1950-2024_RR-T-Vent.csv.gz",
+  "data/synchro_ftp/BASE/QUOT/Q_29_latest-2025-2026_RR-T-Vent.csv.gz"
+ ],
+ "postes": {
+  "29278001": {
+   "nom": "SPEZET",
+   "lat": 48.1735,
+   "lon": -3.7295,
+   "alti": "138",
+   "km": 3.7,
+   "jours_rr": 4930,
+   "premier": "2004-01-01",
+   "dernier": "2017-06-30"
+  },
+  "29249002": {
+   "nom": "SAINT-GOAZEC",
+   "lat": 48.144667,
+   "lon": -3.730833,
+   "alti": "260",
+   "km": 6.9,
+   "jours_rr": 3426,
+   "premier": "2017-06-22",
+   "dernier": "2026-11-07"
+  },
+  "29175001": {
+   "nom": "PLONEVEZ-DU-FAOU",
+   "lat": 48.258667,
+   "lon": -3.835,
+   "alti": "163",
+   "km": 10.9,
+   "jours_rr": 5165,
+   "premier": "2004-01-01",
+   "dernier": "2018-04-30"
+  },
+  "29122001": {
+   "nom": "LAZ",
+   "lat": 48.136,
+   "lon": -3.8265,
+   "alti": "235",
+   "km": 11.4,
+   "jours_rr": 5142,
+   "premier": "2004-01-01",
+   "dernier": "2018-02-28"
+  },
+  "29024003": {
+   "nom": "CARHAIX",
+   "lat": 48.277,
+   "lon": -3.525667,
+   "alti": "150",
+   "km": 16.0,
+   "jours_rr": 6210,
+   "premier": "2004-01-01",
+   "dernier": "2020-12-31"
+  },
+  "29041002": {
+   "nom": "CORAY CHAT EAU",
+   "lat": 48.066,
+   "lon": -3.8255,
+   "alti": "242",
+   "km": 17.6,
+   "jours_rr": 8347,
+   "premier": "2004-01-01",
+   "dernier": "2026-11-07"
+  },
+  "29018001": {
+   "nom": "BRENNILIS",
+   "lat": 48.352667,
+   "lon": -3.869,
+   "alti": "220",
+   "km": 20.1,
+   "jours_rr": 7851,
+   "premier": "2004-01-01",
+   "dernier": "2026-11-07"
+  },
+  "29016002": {
+   "nom": "BRASPARTS",
+   "lat": 48.294833,
+   "lon": -3.962667,
+   "alti": "145",
+   "km": 21.1,
+   "jours_rr": 4383,
+   "premier": "2004-01-01",
+   "dernier": "2015-12-31"
+  },
+  "29048003": {
+   "nom": "EDERN",
+   "lat": 48.105333,
+   "lon": -3.976667,
+   "alti": "150",
+   "km": 22.5,
+   "jours_rr": 4565,
+   "premier": "2004-01-01",
+   "dernier": "2016-06-30"
+  }
+ }
+}
