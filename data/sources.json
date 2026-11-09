@@ -1,0 +1,62 @@
+{
+ "pluie": [
+  {
+   "NOM_USUEL": "MELUN",
+   "LAT": "48.610333",
+   "LON": "2.679500",
+   "ALTI": "91"
+  },
+  [
+   "Q_77_latest-2025-2026_RR-T-Vent.csv.gz",
+   "Q_77_previous-1950-2024_RR-T-Vent.csv.gz"
+  ]
+ ],
+ "nappe": {
+  "02202X0150/FR": {
+   "bss_id": "BSS000RPUR",
+   "nom_commune": "Férolles-Attilly",
+   "altitude_station": "92.5",
+   "profondeur_investigation": 72.0,
+   "x": 2.611386219,
+   "y": 48.720837195,
+   "date_debut_mesure": "1973-05-02",
+   "date_fin_mesure": "2026-11-05"
+  },
+  "02581X0103/P9": {
+   "bss_id": "BSS000TZVX",
+   "nom_commune": "Savigny-le-Temple",
+   "altitude_station": "88.0",
+   "profondeur_investigation": 65.0,
+   "x": 2.555890407,
+   "y": 48.599205496,
+   "date_debut_mesure": "2003-01-28",
+   "date_fin_mesure": "2026-09-17"
+  }
+ },
+ "poste_tigery_91617001": {
+  "Q_91_avant-1949_RR-T-Vent.csv.gz": {
+   "infos": {
+    "NOM_USUEL": "TIGERY",
+    "LAT": "48.638333",
+    "LON": "2.508333",
+    "ALTI": "82"
+   },
+   "jours_depuis_2004": 0,
+   "premier": null,
+   "dernier": null
+  },
+  "Q_91_latest-2025-2026_RR-T-Vent.csv.gz": {
+   "infos": null,
+   "jours_depuis_2004": 0,
+   "premier": null,
+   "dernier": null
+  },
+  "Q_91_previous-1950-2024_RR-T-Vent.csv.gz": {
+   "infos": null,
+   "jours_depuis_2004": 0,
+   "premier": null,
+   "dernier": null
+  }
+ },
+ "erreurs": []
+}
